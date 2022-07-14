@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// ¿ìËÙÅÅÐò
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 void quickSort()
 {
     int a[] = {5, 2, 1, 4, 3};
@@ -9,7 +9,7 @@ void quickSort()
 
 int main()
 {
-    cout << "ÄãºÃÊÀ½ç" << endl;
+    cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
     system("pause");
     return 0;
 }

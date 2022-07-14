@@ -1,26 +1,11 @@
-#include <algorithm>
-#include <bitset>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <deque>
-#include <iostream>
-#include <list>
-#include <map>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <string>
-#include <vector>
-#define ms(x, n) memset(x, n, sizeof(x));
+#include<bits/stdc++.h>
 
 using namespace std;
 //*(int(*)[10])arr_name
 typedef long long LL;
 const int INF = 0x3f3f3f3f;
 const double PI = acos(-1);
+
 inline int lowbit(int x) { return x & -x; }
 
 typedef struct Lnode {
@@ -28,18 +13,26 @@ typedef struct Lnode {
     struct Lnode *next;
 } Lnode, *LinkedList;
 
+/**
+ * @brief ¥¥Ω®“ª∏ˆµ•¡¥±Ì
+ * @param head
+ */
 void initList(LinkedList &head) {
-    head = (LinkedList)malloc(sizeof(Lnode));
+    head = (LinkedList) malloc(sizeof(Lnode));
     head->data = 0;
     head->next = NULL;
 }
 
+/**
+ * @brief Õ∑≤Â∑®¥¥Ω®“ª∏ˆµ•¡¥±Ì
+ * @param head
+ */
 void headInsertList(LinkedList &head) {
     int data[10] = {5, 1, 3, 4, 2, 7, 0, 9, 8, 6};
     int i = 0;
     Lnode *tmp;
     while (i < 10) {
-        tmp = (Lnode *)malloc(sizeof(Lnode));
+        tmp = (Lnode *) malloc(sizeof(Lnode));
         tmp->data = data[i];
         tmp->next = head->next;
         head->next = tmp;
@@ -47,33 +40,48 @@ void headInsertList(LinkedList &head) {
     }
 }
 
+/**
+ * @brief Œ≤≤Â∑®¥¥Ω®“ª∏ˆµ•¡¥±Ì
+ * @param head
+ */
 void tailInsertList(LinkedList &head) {
     int data[10] = {5, 1, 3, 4, 2, 7, 0, 9, 8, 6};
     int i = 0;
     Lnode *tmp;
     LinkedList tail = head;
     while (i < 10) {
-        tmp = (Lnode *)malloc(sizeof(Lnode));
+        tmp = (Lnode *) malloc(sizeof(Lnode));
         tmp->data = data[i];
         tmp->next = NULL;
         tail->next = tmp;
         tail = tmp;
-        i+= 1;
+        i += 1;
     }
 }
 
-void printList(LinkedList &head) {
-    Lnode *p = head->next;
-    while (p != NULL) {
-        printf("%d ", p->data);
-        p = p->next;
+/**
+ * ¥Ú”°¡¥±Ì
+ * @param head
+ */
+void printList(LinkedList head) {
+    cout << "µ±«∞¡¥±ÌŒ™: ";
+    head = head->next;
+    int len = 0;
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+        len += 1;
     }
-    printf("\n");
+    printf("¡¥±Ì≥§∂»Œ™%d \n", len);
 }
 
-void freeList(LinkedList &head){
+/**
+ * @brief …æ≥˝’˚∏ˆµ•¡¥±Ì
+ * @param head
+ */
+void freeList(LinkedList &head) {
     int i = 0;
-    while(head){
+    while (head) {
         Lnode *tmp = head;
         head = head->next;
         free(tmp);
@@ -82,20 +90,136 @@ void freeList(LinkedList &head){
     cout << i << endl;
 }
 
+/**
+ * ªÒ»°¡¥±Ì÷–µƒµ⁄ i Œª
+ *
+ * @param head ¡¥±Ì
+ * @param order  ¥Œ–Ú
+ * @return
+ */
+Lnode *getNodeByOrder(LinkedList head, int order) {
+    if (order < 1) {
+        return nullptr;
+    }
+    int i = 0;
+    while (head && i < order) {
+        head = head->next;
+        i += 1;
+    }
+    return head;
+}
+
+/**
+ * ≤È’“¡¥±Ì÷–÷µŒ™eµƒΩ⁄µ„
+ * @param head
+ * @param e
+ * @return
+ */
+Lnode *getNodeByData(LinkedList head, int e){
+    head = head->next;
+    while (head) {
+        if (head->data == e) {
+            return head;
+        }
+        head = head->next;
+    }
+    //√ª’“µΩ£¨headŒ™null
+    return head;
+}
+
+/**
+ * ‘⁄µ⁄ orderŒ™≤Â»Îdataµƒ ˝æ›
+ * @param head
+ * @param order
+ * @param data
+ * @return bool
+ */
+bool insertAfterOrder(LinkedList &head, int order, int data) {
+    Lnode *tmp = getNodeByOrder(head, order - 1);
+    if (tmp == nullptr) {
+        return false;
+    }
+    Lnode *p = (Lnode *) malloc(sizeof(Lnode *));
+    p->next = tmp->next;
+    p->data = data;
+    tmp->next = p;
+    return true;
+}
+
+bool deleteNodeByOrder(LinkedList &head, int order){
+    Lnode *pre = getNodeByOrder(head, order - 1);
+    if (pre == nullptr) {
+        return false;
+    }
+    Lnode *current = pre->next;
+    pre->next = current->next;
+    free(current);
+    return true;
+}
+
 int main() {
     LinkedList head;
     initList(head);
-    // Â§¥ÊèíÊ≥ï
+    // Õ∑≤Â∑®
+    cout << "Õ∑≤Â∑®" << endl;
     headInsertList(head);
     printList(head);
     freeList(head);
-    // Â∞æÊèíÊ≥ï
-    cout << "init" << endl;
+    // Œ≤≤Â∑®
+    cout << "Œ≤≤Â∑®" << endl;
     initList(head);
-    cout << "init finished" << endl;
     tailInsertList(head);
     printList(head);
 
-    system("pause");
+    //ªÒ»°¡¥±Ìµƒµ⁄3Œª
+    cout << "ªÒ»°¡¥±Ìµƒµ⁄3Œª" << endl;
+    Lnode p = *getNodeByOrder(head, 3);
+    cout << p.data << endl;
+    printList(head);
+
+    //ªÒ»°¡¥±Ì÷–÷µŒ™6µƒΩ⁄µ„
+    cout << "ªÒ»°¡¥±Ì÷–÷µŒ™6µƒΩ⁄µ„" << endl;
+    Lnode tmp = *getNodeByData(head, 6);
+    cout << tmp.data << endl;
+
+    //‘⁄µ⁄0Œª≤Â»Î ˝æ›£¨ ß∞‹
+    cout << "‘⁄µ⁄0Œª≤Â»Î ˝æ›" << endl;
+    if(insertAfterOrder(head, 0, 11)) {
+        cout << "≤Â»Î≥…π¶" << endl;
+        printList(head);
+    } else {
+        cout << "≤Â»Î ß∞‹" << endl;
+    }
+
+    //‘⁄µ⁄5Œª≤Â»Î ˝æ›£¨≥…π¶
+    cout << "‘⁄µ⁄5Œª≤Â»Î ˝æ›" << endl;
+    if(insertAfterOrder(head, 5, 11)) {
+        cout << "≤Â»Î≥…π¶" << endl;
+        printList(head);
+    } else {
+        cout << "≤Â»Î ß∞‹" << endl;
+    }
+
+    //‘Ÿµ⁄13Œª≤Â»Î ˝æ›£¨ ß∞‹
+    cout << "‘⁄µ⁄13Œª≤Â»Î ˝æ›" << endl;
+    if(insertAfterOrder(head, 13, 11)) {
+        cout << "≤Â»Î≥…π¶" << endl;
+        printList(head);
+    } else {
+        cout << "≤Â»Î ß∞‹" << endl;
+    }
+
+    //…æ≥˝µ⁄7Œ™‘™Àÿ
+    cout << "…æ≥˝µ⁄∆ﬂŒª‘™Àÿ" << endl;
+    if(deleteNodeByOrder(head, 7)) {
+        cout << "…æ≥˝≥…π¶" << endl;
+        printList(head);
+    } else {
+        cout << "…æ≥˝ ß∞‹" << endl;
+    }
+
+
+
+
     return 0;
 }
