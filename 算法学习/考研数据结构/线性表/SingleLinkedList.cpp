@@ -60,6 +60,25 @@ void tailInsertList(LinkedList &head) {
 }
 
 /**
+ * 获取链表的长度
+ * @param head
+ * @return
+ */
+int getLength(LinkedList head){
+    int len = 0;
+    while (head) {
+        head = head->next;
+        len += 1;
+    }
+    return len;
+}
+
+
+bool isEmpty(LinkedList head){
+    return head->next == nullptr;
+}
+
+/**
  * 打印链表
  * @param head
  */
@@ -128,7 +147,7 @@ Lnode *getNodeByData(LinkedList head, int e){
 }
 
 /**
- * 在第 order为插入data的数据
+ * 在第 order位插入data的数据
  * @param head
  * @param order
  * @param data
@@ -146,6 +165,12 @@ bool insertAfterOrder(LinkedList &head, int order, int data) {
     return true;
 }
 
+/**
+ * 删除第 order 位的节点
+ * @param head
+ * @param order
+ * @return
+ */
 bool deleteNodeByOrder(LinkedList &head, int order){
     Lnode *pre = getNodeByOrder(head, order - 1);
     if (pre == nullptr) {
@@ -217,9 +242,5 @@ int main() {
     } else {
         cout << "删除失败" << endl;
     }
-
-
-
-
     return 0;
 }
