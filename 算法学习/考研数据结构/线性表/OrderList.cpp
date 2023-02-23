@@ -56,6 +56,6 @@ int main() {
     int initData[] = {7, 2, 5, 4, 5};
     initOrderList(list, initData,5);
     printList(list);
-
+    system("pause");
     return 0;
 }
