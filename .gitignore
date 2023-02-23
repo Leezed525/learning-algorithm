@@ -2,3 +2,4 @@
 .vscode/
 zexe/**
 .idea/
+cmake-build-debug/
