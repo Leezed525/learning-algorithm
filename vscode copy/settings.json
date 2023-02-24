@@ -1,0 +1,9 @@
+{
+    //代码分为三块 用&&分割
+    //cd $dir为进入当前文件目录
+    //g++ $fileName -o F:xx/xxx/xxx 为编译当前文件至某处
+    //最后一段为运行编译好的文件
+    "code-runner.executorMap": {
+        "cpp": " cd $dir && g++ $fileName -o F:/leezed/project/c++/zexe/$fileNameWithoutExt.exe && F:/leezed/project/c++/zexe/$fileNameWithoutExt.exe",
+    },
+}
