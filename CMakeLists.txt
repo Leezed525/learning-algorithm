@@ -6,3 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(helloWorld helloWorld.cpp)
 add_executable(poj2251 "test/vjudge/let_you_fly/simple search/poj2251.cpp")
+add_executable(poj3278 "test/vjudge/let_you_fly/simple search/poj3278.cpp")
+add_executable(a match/codeforce/902/a.cpp)
+add_executable(b match/codeforce/902/b.cpp)
