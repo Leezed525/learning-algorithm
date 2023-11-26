@@ -6,7 +6,7 @@
 //判断一个数字是否是完数
 int find_perfect(int x) {
     int sum = 0;
-    for (int i = 1; i < x; i += 1) {
+    for (int i = 1; i <= x / 2; i += 1) {
         if (x % i == 0) {
             sum += i;
         }
