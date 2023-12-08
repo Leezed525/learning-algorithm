@@ -1,22 +1,13 @@
-#include<stdio.h>
-
-int jiecheng();
+#include<bits/stdc++.h>
 
 int main(){
-    int ans = jiecheng();
-    printf("%d\n",ans);
-    bool flag1 = true;
-    bool flag2 = false;
-    if (flag2, flag1) {
-        printf("yes");
-    }
-    return 0;
-}
 
-int jiecheng(){
-    int ans = 1;
-    for (int i = 0;i < 10 ;i += 1){
-        ans *= i;
+    //初始化随机数种子
+
+    //生成100个随机数并输出
+    for(int i = 0; i < 100; i += 1){
+        srand((unsigned)time(NULL));
+        
+        printf("%d ", rand() % 100);
     }
-    return ans;
 }
