@@ -15,9 +15,12 @@ int main() {
         int length = strlen(str[i]);
         for (int j = 1; j < length; j += 1) {
             //判断前一个字符是否为空格并且当前字符是否为小写字母
-            if (str[i][j - 1] == ' ' && str[i][j] >= 'a' && str[i][j] <= 'z') {
+            if (str[i][j - 1] == ' ' ) {
                 //将当前字符转换为大写字母
-                str[i][j] -= 32;
+//                str[i][j] -= 32;
+                if ('a' <= str[i][j] <= 'z') {
+
+                }
             }
         }
         puts(str[i]);

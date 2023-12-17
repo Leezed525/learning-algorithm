@@ -3,6 +3,7 @@
 //
 #include<stdio.h>
 #include<cstring>
+//#include<string.h>
 
 
 int main(){
@@ -29,5 +30,9 @@ int main(){
     if(flag) {
         printf("Not Found\n");
     }
+    char tmp[100] = "123";
+    char tmp_char = 'a';
+    strcat(str, tmp_char);
+
     return 0;
 }
