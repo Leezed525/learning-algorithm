@@ -1,48 +1,37 @@
 #include<stdio.h>
-
-struct stu {
-    char name[10];
-    float score[4], sum;
+#include<stdlib.h>
+struct Time{
+    int hour;
+    int minute;
+    int second;
 };
+int main(){
+    setbuf(stdout, NULL);
+    int n;
+    struct Time *time;
+    int seconds;
+    time = (Time *) malloc(sizeof(Time));
+    printf("请输入一个时间数值：");
+    scanf("%d-%d-%d",&time->hour,&time->minute,&time->second);
+    printf("请输入一个秒数：");
+    scanf("%d",&n);
+    time->second += seconds;
+    if (time->second>=60) {
+        int minutesToAdd=time->second/60;
+        time->second%=60;
+        time->minute+=minutesToAdd;
 
-void px(stu *);
+        if (time->minute>=60) {
+            int hoursToAdd=time->minute / 60;
+            time->minute%=60;
+            time->hour+=hoursToAdd;
 
-void shuchu(stu);
-
-int main() {
-    stu a[10];
-    int i, j;
-    for (i = 0; i < 10; i++) {
-        scanf("%s", a[i].name);
-        a[i].sum = 0;
-        for (j = 0; j < 4; j++) {
-            scanf("%d", &a[i].score[j]);
-            a[i].sum += a[i].score[j];
+            if (time->hour>=24) {
+                time->hour%=24;
+            }
         }
     }
-    px(a);
-    for (i = 0; i < 10; i++)
-        shuchu(a[i]);
-}
-
-void px(stu *p) {
-    int i, j, k;
-    stu temp;
-    for (i = 0; i < 10; i++) {
-        k = i;
-        for (j = i + 1; j < 10; j++)
-            if ((p + j)->sum > (p + k)->sum)
-                k = j;
-        temp = *(p + i);
-        *(p + i) = *(p + k);
-        *(p + k) = temp;
-    }
-}
-
-void shuchu(stu a) {
-    int i;
-    printf("%s", a.name);
-    for (i = 0; i < 4; i++)
-        printf("%4d%4d", a.score[i], a.sum);
-    printf("\n");
+    printf("时间再过%d秒后的值为：%d:%d:%d\n",n, time->hour, time->minute, time->second);
+    free(time);
+    return 0;
 }

@@ -3,8 +3,6 @@
 //
 #include<stdio.h>
 
-
-
 typedef struct {
     char name[10];
     float score[4];
@@ -25,6 +23,16 @@ void sort(student *p, int len) {
     }
 }
 
+void output(student *a, int n){
+    for (int i = 0; i < n; i += 1) {
+        printf("%s ", a[i].name);
+        for (int j = 0; j < 4; j += 1) {
+            printf("%4.1f ", a[i].score[j]);
+        }
+        printf("sum: %4.1f\n", a[i].sum);
+    }
+}
+
 int main() {
     setbuf(stdout, NULL);
     student a[10];
@@ -37,13 +45,7 @@ int main() {
         }
     }
     sort(a, 10);
-    for (int i = 0; i < 10; i += 1) {
-        printf("%s ", a[i].name);
-        for (int j = 0; j < 4; j += 1) {
-            printf("%4.1f ", a[i].score[j]);
-        }
-        printf("sum: %4.1f\n", a[i].sum);
-    }
+    output(a, 10);
     return 0;
 }
 /*
