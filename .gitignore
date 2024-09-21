@@ -4,3 +4,4 @@ zexe/**
 .idea/
 cmake-build-debug/
 doc/
+build/

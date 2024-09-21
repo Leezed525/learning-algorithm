@@ -5,8 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 add_executable(helloWorld helloWorld.cpp)
-add_executable(1 test/tmp/eighth/1.cpp)
-add_executable(2 test/tmp/eighth/2.cpp)
-add_executable(3 test/tmp/eighth/3.cpp)
-add_executable(4 test/tmp/eighth/4.cpp)
-add_executable(5 test/tmp/eighth/5.cpp)
+add_executable(delete match/atcoder/beginner/372/delete.cpp)
+add_executable(3a match/atcoder/beginner/372/3a.cpp)
+add_executable(countabc match/atcoder/beginner/372/countabc.cpp)
