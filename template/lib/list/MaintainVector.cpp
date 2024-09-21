@@ -7,10 +7,7 @@
 #include "vector"
 #include "algorithm"
 #include "iostream"
-#include "iterator"
 
-using std::begin;
-using std::end;
 
 class MaintainVector {
 private:
