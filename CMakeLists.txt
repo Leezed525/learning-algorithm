@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(learning-algorithm)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 
 add_executable(helloWorld helloWorld.cpp)
@@ -14,3 +14,4 @@ add_executable(poj1426 "test/vjudge/let_you_fly/simple search/poj1426.cpp")
 add_executable(ZhansBlender match/codeforce/973/ZhansBlender.cpp)
 add_executable(BattleforSurvive match/codeforce/973/BattleforSurvive.cpp)
 add_executable(tmp test/tmp.cpp)
+add_executable(MaintainList template/lib/list/MaintainVector.cpp)
