@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 
-add_executable(poj3984 "test/vjudge/let_you_fly/simple search/poj3984.cpp")
-add_executable(hdu1241 "test/vjudge/let_you_fly/simple search/hdu1241.cpp")
+add_executable(hdu1495 "test/vjudge/let_you_fly/simple search/hdu1495.cpp")
+add_executable(hdu2612 "test/vjudge/let_you_fly/simple search/hdu2612.cpp")
