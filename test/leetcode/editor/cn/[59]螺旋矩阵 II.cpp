@@ -38,44 +38,18 @@ public:
         for (int i = 0; i < n; i++) {
             ans.push_back(vector<int>(n, 0));
         }
-        int cur = 1;
-        int i = 0, j = 0;
         int num = 1;
         int all_round = (n + 1) / 2;
         for (int round = 0; round < all_round; round += 1) {
-            //向右填充
-            while (j < n - round) {
-                cout << i << " " << j << " " <<  num << endl;
-                ans[i][j++] = num++;
-            }
-            j--;
-            i++;
-            if (num > n * n) {
-                break;
-            }
+            //向右
+            for (int j = round; j < n - round; j++) ans[round][j] = num++;
             //向下
-            while (i < n - round) {
-                cout << i << " " << j << " " <<  num << endl;
-                ans[i++][j] = num++;
-            }
-            j--;
-            i--;
+            for (int i = round + 1; i < n - round; i++) ans[i][n - round - 1] = num++;
             //向左
-            while (j >= 0 + round) {
-                cout << i << " " << j << " " <<  num << endl;
-                ans[i][j--] = num++;
-            }
-            i--;
-            j++;
+            for (int j = n - round - 2; j >= round && n - round - 1 != round; j--) ans[n - round - 1][j] = num++;
             //向上
-            while (i > 0 + round) {
-                cout << i << " " << j << " " <<  num << endl;
-                ans[i--][j] = num++;
-            }
-            i++;
-            j++;
+            for (int i = n - round - 2; i > round && n - round - 1 != round; i--) ans[i][round] = num++;
         }
-
         return ans;
 
     }
