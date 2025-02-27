@@ -102,8 +102,37 @@ using namespace std;
  */
 class Solution {
 public:
+
+    int getListLength(ListNode *head){
+        ListNode *p = head;
+        int len = 0;
+        while(p){
+            len++;
+            p = p->next;
+        }
+        return len;
+    }
+
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        
+        int a_len = getListLength(headA);
+        int b_len = getListLength(headB);
+        ListNode *p = headA;
+        ListNode *q = headB;
+        if(a_len > b_len) {
+            for (int i = 0; i < a_len - b_len; i++) {
+                p = p->next;
+            }
+        } else {
+            for (int i = 0; i < b_len - a_len; i++) {
+                q = q->next;
+            }
+        }
+        while(p && q){
+            if(p == q) return p;
+            p = p->next;
+            q = q->next;
+        }
+        return nullptr;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
