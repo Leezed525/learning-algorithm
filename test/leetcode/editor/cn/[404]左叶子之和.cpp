@@ -49,8 +49,24 @@ using namespace std;
  */
 class Solution {
 public:
+
+    int recursion_left(TreeNode *root,bool left_flag){
+        if(root -> right == nullptr && root -> left == nullptr && left_flag){
+            return root -> val;
+        }
+        int sum = 0;
+        if(root -> left != nullptr){
+            sum += recursion_left(root -> left,true);
+        }
+        if(root -> right != nullptr){
+            sum += recursion_left(root -> right,false);
+        }
+        return sum;
+
+    }
+
     int sumOfLeftLeaves(TreeNode* root) {
-        
+        return recursion_left(root,false);
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
