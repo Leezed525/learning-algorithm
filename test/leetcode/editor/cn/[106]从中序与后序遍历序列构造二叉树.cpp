@@ -34,6 +34,7 @@
 // Related Topics 树 数组 哈希表 分治 二叉树 👍 1311 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -50,8 +51,30 @@ using namespace std;
  */
 class Solution {
 public:
-    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        //找到后续的最后一个点
+        TreeNode *cur = new TreeNode(postorder[postorder.size() - 1]);
+        //找到中序的根节点
+        int root = 0;
+        for (int i = 0; i < inorder.size(); i++) {
+            if (inorder[i] == cur->val) {
+                root = i;
+                break;
+            }
+        }
+        //递归左右子树
+        vector<int> leftInorder(inorder.begin(), inorder.begin() + root);
+        vector<int> rightInorder(inorder.begin() + root + 1, inorder.end());
+        vector<int> leftPostorder(postorder.begin(), postorder.begin() + root);
+        vector<int> rightPostorder(postorder.begin() + root, postorder.end() - 1);
+
+        if (leftInorder.size() > 0) {
+            cur->left = buildTree(leftInorder, leftPostorder);
+        }
+        if (rightInorder.size() > 0) {
+            cur->right = buildTree(rightInorder, rightPostorder);
+        }
+        return cur;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
