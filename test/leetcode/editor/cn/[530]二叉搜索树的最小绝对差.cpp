@@ -51,8 +51,22 @@ using namespace std;
  */
 class Solution {
 public:
+
+    vector<int> res;
+
+    void pre_iter(TreeNode *root) {
+        if (root == nullptr) return;
+        pre_iter(root->left);
+        res.push_back(root->val);
+        pre_iter(root->right);
+    }
     int getMinimumDifference(TreeNode* root) {
-        
+        pre_iter(root);
+        int ans = INT_MAX;
+        for (int i = 1; i < res.size(); i++) {
+            ans = min(ans, res[i] - res[i - 1]);
+        }
+        return ans;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
