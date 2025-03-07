@@ -48,13 +48,33 @@
 // Related Topics 贪心 数组 👍 1814 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+        int sum = 0;
+        int min = INT32_MAX;
+        for (int i = 0; i < gas.size(); i += 1) {
+            int rest = gas[i] - cost[i];
+            sum += rest;
+            if (sum < min) {
+                min = sum;
+            }
+        }
+
+        if (sum < 0) return -1;
+        if (min >= 0) return 0;
+        for (int i = gas.size() - 1; i >= 0; i -= 1) {
+            int rest = gas[i] - cost[i];
+            min += rest;
+            if (min >= 0) {
+                return i;
+            }
+        }
+        return -1;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
