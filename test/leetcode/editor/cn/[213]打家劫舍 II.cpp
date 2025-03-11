@@ -40,13 +40,31 @@
 // Related Topics 数组 动态规划 👍 1674 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int rob(vector<int>& nums) {
-        
+    int rob(vector<int> &nums) {
+        int dp1[105][2] = {0}, dp2[105][2] = {0};
+        if(nums.size() == 1) return nums[0];
+        dp1[0][0] = 0, dp1[0][1] = nums[0];
+        dp2[1][0] = 0, dp2[1][1] = nums[1];
+
+        int n = nums.size();
+        for (int i = 1; i < n - 1; i += 1) {
+            dp1[i][0] = max(dp1[i - 1][0], dp1[i - 1][1]);
+            dp1[i][1] = dp1[i - 1][0] + nums[i];
+        }
+
+        for (int i = 2; i < n; i += 1) {
+            dp2[i][0] = max(dp2[i - 1][0], dp2[i - 1][1]);
+            dp2[i][1] = dp2[i - 1][0] + nums[i];
+        }
+
+        return max(dp1[n - 2][0], max(dp1[n - 2][1], max(dp2[n - 1][0], dp2[n - 1][1])));
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
