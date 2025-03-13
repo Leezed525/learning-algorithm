@@ -1,23 +1,25 @@
-//给你一个字符串 s，找到 s 中最长的回文子串。 
+//给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。 
 //
-// 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。 
+// 回文字符串 是正着读和倒过来读一样的字符串。 
+//
+// 子字符串 是字符串中的由连续字符组成的一个序列。 
 //
 // 
 //
 // 示例 1： 
 //
 // 
-//输入：s = "babad"
-//输出："bab"
-//解释："aba" 同样是符合题意的答案。
+//输入：s = "abc"
+//输出：3
+//解释：三个回文子串: "a", "b", "c"
 // 
 //
 // 示例 2： 
 //
 // 
-//输入：s = "cbbd"
-//输出："bb"
-// 
+//输入：s = "aaa"
+//输出：6
+//解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa" 
 //
 // 
 //
@@ -25,38 +27,32 @@
 //
 // 
 // 1 <= s.length <= 1000 
-// s 仅由数字和英文字母组成 
+// s 由小写英文字母组成 
 // 
 //
-// Related Topics 字符串 动态规划 👍 6826 👎 0
+// Related Topics 双指针 字符串 动态规划 👍 1413 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    string longestPalindrome(string s) {
+
+
+    int countSubstrings(string s) {
         int dp[1005][1005] = {0};
         int res = 0;
 //        for (int i = 1; i <= s.size(); i += 1) {
 //            dp[i][i] = 1;
 ////            res += 1;
 //        }
-        int start = -1;
-        int end = -1;
-        int max_len = 0;
 
         for (int i = s.size(); i > 0; i -= 1) {
             for (int j = i; j <= s.size(); j += 1) {
                 if (s[i - 1] == s[j - 1] ) {
                     if (j - i <= 1 || dp[i + 1][j - 1] == 1) {
-                        int len = j - i + 1;
-                        if (len > max_len) {
-                            max_len = len;
-                            start = i - 1;
-                            end = j - 1;
-                        }
                         dp[i][j] = 1;
                         res += 1;
                     }
@@ -64,7 +60,15 @@ public:
             }
         }
 
-        return s.substr(start, max_len);
+        //输出dp数组
+//        for (int i = 1; i <= s.size(); i += 1) {
+//            for (int j = 1; j <= s.size(); j += 1) {
+//                cout << dp[i][j] << " ";
+//            }
+//            cout << endl;
+//        }
+
+        return res;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)

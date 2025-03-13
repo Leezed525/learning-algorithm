@@ -56,15 +56,9 @@ public:
         get_Next(needle, next);        //得到next数组
         int j = 0;
         for (int i = 0; i < haystack.size(); i += 1) {
-            while (j > 0 && haystack[i] != needle[j]) {
-                j = next[j - 1];
-            }
-            if (haystack[i] == needle[j]) {
-                j += 1;
-            }
-            if (j == needle.size()) {
-                return i - j + 1;
-            }
+            while (j > 0 && haystack[i] != needle[j]) j = next[j - 1];
+            if (haystack[i] == needle[j]) j += 1;
+            if (j == needle.size()) return i - j + 1;
         }
         return -1;
     }
