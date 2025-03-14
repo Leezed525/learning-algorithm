@@ -1,40 +1,47 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int n, x, m = 1;
-        cin >> n;
-        string s = "";
-        while (m <= n) {
-            cout << "? " << s << "0" << endl;
-            cin >> x;
-            if (x) {
-                s += "0";
-                ++m;
-                continue;
+class Solution {
+public:
+    int divide(int a, int b) {
+        bool neg_flag = true;
+        if (a < 0) neg_flag = !neg_flag;
+        if (b < 0) neg_flag = !neg_flag;
+
+        unsigned _a = a < 0 ? ~a + 1U : a;
+        unsigned _b = b < 0 ? ~b + 1U : b;
+        unsigned res = 0;
+        int pos = 31;
+
+        while (_a >= _b) {
+            unsigned tmp = _b;
+            tmp = tmp << pos;
+            cout << "tmp = " << tmp << endl;
+            while (_a < (_b << pos)){
+                pos--;
+                cout << pos << endl;
             }
-            cout << "? " << s << "1" << endl;
-            cin >> x;
-            if (!x)break;
-            s += "1";
-            ++m;
+            _a -= (_b << pos);
+            res |= (1 << pos);
         }
-        while (m <= n) {
-            cout << "? 0" << s << endl;
-            cin >> x;
-            if (x) {
-                s = "0" + s;
-                ++m;
-                continue;
-            }
-            s = "1" + s;
-            ++m;
+
+//        while (_a >= _b) {
+//            while ((_a >> pos) < _b) pos--;
+//            _a -= (_b << pos);
+//            res |= (1U << pos);
+//        }
+
+        if (res > INT_MAX) {
+            return neg_flag ? INT_MAX : INT_MIN;
         }
-        cout << "! " << s << endl;
+
+        return neg_flag ? res : -res;
     }
+};
+
+int main(){
+    Solution s;
+    cout << s.divide(15, 2) << endl;
     return 0;
 }
