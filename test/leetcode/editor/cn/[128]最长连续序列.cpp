@@ -37,13 +37,55 @@
 // Related Topics 并查集 数组 哈希表 👍 2425 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
-        
+
+    unordered_map<int, int> fa;
+
+    int get(int x) {
+        if (fa[x] == x) return x;
+        return fa[x] = get(fa[x]);
+    }
+
+    void merge(int x, int y) {
+        fa[get(x)] = get(y);
+    }
+
+
+    int longestConsecutive(vector<int> &nums) {
+        for (int i = 0; i < nums.size(); i += 1) {
+            if (fa.count(nums[i])) continue;
+            fa[nums[i]] = nums[i];
+            if (fa.count(nums[i] - 1)) merge(nums[i], nums[i] - 1);
+            if (fa.count(nums[i] + 1)) merge(nums[i], nums[i] + 1);
+        }
+
+
+//        for(auto it = fa.begin(); it != fa.end(); it++) {
+//            cout << it->first << " " << it->second << endl;
+//        }
+//        cout << endl;
+
+
+        unordered_map<int, int> cnt;
+        int maxn = 0;
+
+        for(auto it = fa.begin(); it != fa.end(); it++) {
+            cnt[get(it->first)]++;
+            maxn = max(maxn, cnt[get(it->first)]);
+        }
+
+//        for(int i = 0;i < nums.size(); i += 1) {
+//            cnt[get(nums[i])]++;
+//            maxn = max(maxn, cnt[get(nums[i])]);
+//        }
+
+        return maxn;
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
