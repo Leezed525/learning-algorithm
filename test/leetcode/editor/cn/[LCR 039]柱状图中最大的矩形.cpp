@@ -47,51 +47,29 @@ using namespace std;
 class Solution {
 public:
     int largestRectangleArea(vector<int> &heights) {
-        stack<int> ls, rs;
-        vector<int> lres(heights.size(), 0), rres(heights.size(), 0);
-        //计算右边有多少个比i节点高的矩阵
-        for (int i = 0; i < heights.size(); i += 1) {
-            if (rs.empty()) {
-                rs.push(i);
-                continue;
+        int n = heights.size();
+        vector<int> left(n), right(n);
+        stack<int> s;
+        //求左边
+        for (int i = 0; i < n; i += 1) {
+            while (!s.empty() && heights[s.top()] >= heights[i]) {
+                right[s.top()] = i;
+                s.pop();
             }
-            while (!rs.empty() && heights[i] < heights[rs.top()]) {
-                rres[rs.top()] = i - rs.top() - 1;
-                rs.pop();
-            }
-            rs.push(i);
+            left[i] = s.empty() ? -1 : s.top();
+            s.push(i);
         }
-        while (!rs.empty()) {
-            rres[rs.top()] = heights.size() - rs.top() - 1;
-            rs.pop();
+        while (!s.empty()) {
+            right[s.top()] = n;
+            s.pop();
         }
-        //计算左边
-        for (int i = heights.size() - 1; i >= 0; i -= 1) {
-            if (ls.empty()) {
-                ls.push(i);
-                continue;
-            }
-            while (!ls.empty() && heights[i] < heights[ls.top()]) {
-                lres[ls.top()] = ls.top() - i - 1;
-                ls.pop();
-            }
-            ls.push(i);
-        }
-
-        while (!ls.empty()) {
-            lres[ls.top()] = ls.top();
-            ls.pop();
-        }
-        //输出左右矩阵
-//        for (int i = 0; i < lres.size(); i += 1) cout << lres[i] << " ";
+//        for (int i = 0; i < n; i += 1) cout << left[i] << " ";
 //        cout << endl;
-//        for (int i = 0; i < rres.size(); i += 1) cout << rres[i] << " ";
+//        for (int i = 0; i < n; i += 1) cout << right[i] << " ";
 //        cout << endl;
-
         int res = 0;
-
-        for (int i = 0; i < rres.size(); i += 1) {
-            res = max(res, (rres[i] + lres[i] + 1) * heights[i]);
+        for (int i = 0; i < n; i += 1) {
+            res = max(res, (right[i] - left[i] - 1) * heights[i]);
         }
         return res;
     }
