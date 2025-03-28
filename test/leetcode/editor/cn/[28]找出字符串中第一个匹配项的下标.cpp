@@ -48,6 +48,12 @@ public:
             if (s[i] == s[j]) j++;    //前后缀相同，j指针后移
             next[i] = j;    //更新next数组
         }
+
+        //打印next数组
+//        for (int i = 0; i < s.size(); i += 1) {
+//            cout << next[i] << " ";
+//        }
+//        cout << endl;
     }
 
     int strStr(string haystack, string needle) {
