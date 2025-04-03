@@ -38,13 +38,39 @@
 // Related Topics 并查集 数组 哈希表 👍 91 👎 0
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
 
+    unordered_map<int, int> fa;
+
+    int get(int x) {
+        return x == fa[x] ? x : fa[x] = get(fa[x]);
+    }
+
+    void merge(int x, int y) {
+        fa[get(x)] = get(y);
+    }
+
+    int longestConsecutive(vector<int> &nums) {
+        for (int i = 0; i < nums.size(); i += 1) {
+            if(fa.count(nums[i])) continue;
+            fa[nums[i]] = nums[i];
+            if (fa.count(nums[i] - 1)) merge(nums[i], nums[i] - 1);
+            if (fa.count(nums[i] + 1)) merge(nums[i], nums[i] + 1);
+        }
+
+        unordered_map<int, int> cnt;
+        int ans = 0;
+        for (auto &p : fa) {
+//            cout << p.first << " " << p.second << endl;
+            cnt[get(p.first)] += 1;
+            ans = max(ans, cnt[get(p.first)]);
+        }
+        return ans;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
