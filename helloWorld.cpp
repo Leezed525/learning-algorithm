@@ -49,10 +49,35 @@ TreeNode *deserialize(string data) {
     return root;
 }
 
+
+vector<vector<int>> fileCombination(int target) {
+    vector<vector<int>> ans;
+    int l = 1, r = 2;
+    int sum = 1;
+    while (r < target / 2) {
+        sum += r;
+        r++;
+        if (sum == target) {
+            vector<int> tmp;
+            for (int i = l; i < r; i++) {
+                tmp.push_back(i);
+            }
+            ans.push_back(tmp);
+        } else {
+            while (sum > target) {
+                sum -= l++;
+            }
+        }
+    }
+    return ans;
+}
+
+
 int main() {
 
-//    vector<int> postorder = {4, 6, 5, 9, 8};
-    string data = "[1,2,3,null,null,4,5,null,null,null,null]";
-//    cout << (verifyTreeOrder(postorder) ? "true" : "false") << endl;
-    deserialize(data);
+
+//    string data = "[1,2,3,null,null,4,5,null,null,null,null]";
+//    deserialize(data);
+    int target = 16;
+    fileCombination(target);
 }
