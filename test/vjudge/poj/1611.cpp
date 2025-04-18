@@ -14,6 +14,7 @@
 #include <stack>
 #include <string>
 #include <vector>
+
 using namespace std;
 //*(int(*)[10])arr_name
 typedef long long LL;
@@ -26,7 +27,7 @@ void init() {
     for (int i = 0; i < n; i++) f[i] = i;
 }
 
-int findset(int x) { return x == f[x] ? x : f[x] = findset(f[x]); }
+int get(int x) { return x == f[x] ? x : f[x] = get(f[x]); }
 
 int main() {
     while (cin >> n >> m && n) {
@@ -38,16 +39,16 @@ int main() {
             while (num--) {
                 int b;
                 scanf("%d", &b);
-                int x = findset(a);
-                int y = findset(b);
+                int x = get(a);
+                int y = get(b);
                 if (x != y) {
                     f[x] = y;
                 }
             }
         }
-        int tmp = findset(0), ans = 0;
+        int tmp = get(0), ans = 0;
         for (int i = 0; i < n; i++) {
-            if (findset(i) == tmp) ans++;
+            if (get(i) == tmp) ans++;
         }
         cout << ans << endl;
     }
