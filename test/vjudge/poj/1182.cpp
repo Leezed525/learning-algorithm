@@ -19,7 +19,7 @@ using namespace std;
 //*(int(*)[10])arr_name
 typedef long long LL;
 const int INF = 0x3f3f3f3f;
-const double PI = acos(-1);
+//const double PI = acos(-1);
 const int MAXN = 1e5 + 10;
 int n, m;
 struct node {
