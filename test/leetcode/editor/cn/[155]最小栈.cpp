@@ -75,12 +75,12 @@ public:
     }
 
     int top() {
-        if (s.empty()) return -1;
+//        if (s.empty()) return -1;
         return s.top();
     }
 
     int getMin() {
-        if (minS.empty()) return -1;
+//        if (minS.empty()) return -1;
         return minS.top();
     }
 };
