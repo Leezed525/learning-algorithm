@@ -47,7 +47,23 @@ using namespace std;
  */
 class Solution {
 public:
+
+    bool dfs(ListNode *cur, ListNode *&order){
+        if(cur == nullptr) return true;
+        if(dfs(cur->next,order)) {
+            if (cur->val == order->val) {
+                order = order->next;
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
+
     bool isPalindrome(ListNode* head) {
+        ListNode *cur = head;
+        ListNode *order = head;
+        return dfs(cur, order);
         
     }
 };
